@@ -3,8 +3,8 @@ export const SAMPLE_SPELLS = [
   /* ---------------- CANTRIPS (0) ---------------- */
 
   {
-    index: "fire-bolt",
-    name: "Fire Bolt",
+    index: "Test-Bolt",
+    name: "Test-Bolt",
     level: 0,
     school: { name: "Evocation" },
     classes: [{ name: "Wizard" }, { name: "Sorcerer" }],
@@ -12,8 +12,8 @@ export const SAMPLE_SPELLS = [
     range: "120 Feet",
     duration: "Instantaneous",
     components: ["V", "S"],
-    damageType: "Fire",
-    desc: ["A mote of fire streaks toward a target, dealing 1d10 fire damage."],
+    damageType: "Necrotic",
+    desc: ["Does 10 necrotic damage. and it like really hurts. But you also die instantly. So like, be careful."],
   },
   {
     index: "chill-touch",
