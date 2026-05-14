@@ -22,7 +22,7 @@ export default function AddSpellForm({
 
       <div className="grid grid-cols-2 gap-4">
 
-        {/* NAME */}
+        {/* NAME  */}
         <input
           placeholder="Name"
           value={newSpell.name}
