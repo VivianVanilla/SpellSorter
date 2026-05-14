@@ -5,7 +5,7 @@ import { filterSpells } from "./utils/filterSpells";
 import { SAMPLE_SPELLS } from "./data/spells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
 import SpellModal from "./components/SpellModal";
-import SpellCard from "./components/spellcard";
+import SpellCard from "./components/spellCard";
 import AddSpellForm from "./components/AddSpellForm";
 
 
