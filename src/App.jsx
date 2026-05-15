@@ -46,7 +46,7 @@ export default function App() {
     range: "",
     duration: "",
     desc: "",
-    ctag: [""],
+    ctag: "",
     materialComponents: false,
     materials: "",
     ritual: false,
@@ -108,10 +108,12 @@ const addSpell = async () => {
     materialComponents: newSpell.materialComponents,
     materials: newSpell.materials,
     damageType: newSpell.damageType,
+    ctag: newSpell.ctag,
     ritual: newSpell.ritual,
-    desc: Array.isArray(newSpell.desc)
-      ? newSpell.desc
-      : [newSpell.desc],
+    desc: newSpell.desc
+  .split("\n")
+  .map((line) => line.trim())
+  .filter((line) => line !== ""),
   };
 
   try {

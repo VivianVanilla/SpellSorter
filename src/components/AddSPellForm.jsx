@@ -162,28 +162,24 @@ export default function AddSpellForm({
 >
   <option value="">Select Campaign Tag</option>
   <option value="Twilight">Twilight</option>
-  <option value="Approved">Approved</option>
   <option value="Special-Banned">Special/Banned</option>
 </select>
 
-        <textarea
-          placeholder="Description"
-          value={
-            Array.isArray(newSpell.desc)
-              ? newSpell.desc.join("\n\n")
-              : newSpell.desc
-          }
-         onChange={(e) =>
-  setNewSpell((p) => ({
-    ...p,
-    desc: e.target.value
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line !== ""),
-  }))
-}
-          className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-[160px]"
-        />
+       <textarea
+  placeholder="Description"
+  value={
+    Array.isArray(newSpell.desc)
+      ? newSpell.desc.join("\n")
+      : newSpell.desc
+  }
+  onChange={(e) =>
+    setNewSpell((p) => ({
+      ...p,
+      desc: e.target.value,
+    }))
+  }
+  className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-[160px]"
+/>
 
         {/* CLASSES */}
         <div className="col-span-1 md:col-span-2 flex flex-wrap gap-2">
