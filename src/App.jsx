@@ -2,17 +2,23 @@ import { useMemo, useState } from "react";
 import { Plus, Shield, Trash2, Pencil, Sparkles, Search } from "lucide-react";
 import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS } from "./constants/spellData";
 import { filterSpells } from "./utils/filterSpells";
-import { SAMPLE_SPELLS } from "./data/spells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
 import SpellModal from "./components/SpellModal";
 import SpellCard from "./components/SpellCard";
 import AddSpellForm from "./components/AddSPellForm";
+import { useEffect } from "react";
 
 
 /* ------------------ APP ------------------ */
 
 export default function App() {
-  const [spells, setSpells] = useState(SAMPLE_SPELLS);
+  const [spells, setSpells] = useState([]);
+
+ useEffect(() => {
+  fetch("/api/getSpells")
+    .then((r) => r.json())
+    .then(setSpells);
+}, []);
 
   const [filters, setFilters] = useState({
   level: "All",
