@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Plus, Shield, Trash2, Pencil, Sparkles, Search } from "lucide-react";
+import { Plus, Shield, Pencil, Sparkles, Search } from "lucide-react";
 import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS } from "./constants/spellData";
 import { filterSpells } from "./utils/filterSpells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
@@ -42,10 +42,14 @@ export default function App() {
     school: "Evocation",
     classes: [],
     damageType: "Fire",
-    components: ["V", "S"],
-    range: "Self",
-    duration: "Instantaneous",
+    components: [""],
+    range: "",
+    duration: "",
     desc: "",
+    ctag: [""],
+    materialComponents: false,
+    materials: "",
+    ritual: false,
   });
 
 
@@ -130,9 +134,9 @@ const addSpell = async () => {
       school: "Evocation",
       classes: [],
       damageType: "Fire",
-      components: ["V", "S"],
-      range: "Self",
-      duration: "Instantaneous",
+      components: ["V"],
+      range: "",
+      duration: "",
       desc: "",
       materialComponents: false,
       materials: "",

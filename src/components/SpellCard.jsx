@@ -1,4 +1,3 @@
-import { Trash2 } from "lucide-react";
 import { CLASS_COLORS } from "../constants/spellData";
 
 export default function SpellCard({
@@ -30,6 +29,8 @@ export default function SpellCard({
             <span className="text-zinc-500">Duration:</span>{" "}
             {spell.duration}
           </div>
+
+          
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -51,17 +52,20 @@ export default function SpellCard({
             );
           })}
 
-          {adminMode && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                removeSpell(spell.index);
-              }}
-            >
-              <Trash2 />
-            </button>
-          )}
         </div>
+
+        <div className="flex flex-wrap gap-2 items-center">
+
+       {/* CAMPAIGN TAG */}
+  {spell.ctag && (
+    <span
+      className="px-2 py-1 text-xs rounded-md border border-purple-500/50 bg-purple-900/30 text-purple-200"
+    >
+      {spell.ctag}
+    </span>
+  )}
+
+</div>  
       </div>
     </div>
   );

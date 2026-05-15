@@ -64,14 +64,18 @@ export default function AddSpellForm({
           ))}
         </select>
 
-        <input
-          placeholder="Casting Time"
-          value={newSpell.casting_time}
-          onChange={(e) =>
-            setNewSpell((p) => ({ ...p, casting_time: e.target.value }))
-          }
-          className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
-        />
+        <select
+  value={newSpell.casting_time}
+  onChange={(e) =>
+    setNewSpell((p) => ({ ...p, casting_time: e.target.value }))
+  }
+  className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+>
+  <option value="">Select Casting Time</option>
+  <option value="1 Action">1 Action</option>
+  <option value="Bonus Action">1 Bonus Action</option>
+  <option value="Reaction">1 Reaction</option>
+</select>
 
         <input
           placeholder="Range"
@@ -131,6 +135,10 @@ export default function AddSpellForm({
           className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
         />
 
+
+
+
+
         <label className="flex items-center gap-3 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3">
           <input
             type="checkbox"
@@ -145,6 +153,19 @@ export default function AddSpellForm({
           Ritual
         </label>
 
+           <select
+  value={newSpell.ctag}
+  onChange={(e) =>
+    setNewSpell((p) => ({ ...p, ctag: e.target.value }))
+  }
+  className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+>
+  <option value="">Select Campaign Tag</option>
+  <option value="Twilight">Twilight</option>
+  <option value="Approved">Approved</option>
+  <option value="Special-Banned">Special/Banned</option>
+</select>
+
         <textarea
           placeholder="Description"
           value={
@@ -152,12 +173,15 @@ export default function AddSpellForm({
               ? newSpell.desc.join("\n\n")
               : newSpell.desc
           }
-          onChange={(e) =>
-            setNewSpell((p) => ({
-              ...p,
-              desc: e.target.value.split("\n\n").filter(Boolean),
-            }))
-          }
+         onChange={(e) =>
+  setNewSpell((p) => ({
+    ...p,
+    desc: e.target.value
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line !== ""),
+  }))
+}
           className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-[160px]"
         />
 
