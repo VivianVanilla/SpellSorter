@@ -184,7 +184,7 @@ const addSpell = async () => {
 
 
         {/* ADMIN */}
-        <div className="hidden md:block mt-auto pt-6">
+        <div className="mt-auto pt-6">
           {!adminMode ? (
             <>
               <div className="text-sm text-zinc-400 flex items-center gap-2 mb-2">
