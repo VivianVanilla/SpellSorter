@@ -12,6 +12,8 @@
   "range": "120 feet",
   "duration": "Instantaneous",
   "components": ["V", "S"],
+  "materialComponents": false,
+  "materials": "",
   "ritual": false,
   "damageType": "Fire",
   "desc": [

@@ -48,6 +48,9 @@ export default function App() {
     desc: "",
   });
 
+
+  
+
   /* ------------------ ADMIN LOGIN ------------------ */
 
   const handleAdminLogin = () => {
@@ -85,36 +88,42 @@ export default function App() {
 
   /* ------------------ CREATE SPELL ------------------ */
 
-  const addSpell = () => {
-    if (!newSpell.name.trim()) return;
+const addSpell = async () => {
+  if (!newSpell.name.trim()) return;
 
-    const slug = newSpell.name.toLowerCase().replaceAll(" ", "-");
+  const spellToSend = {
+    index: newSpell.name.toLowerCase().replaceAll(" ", "-"),
+    name: newSpell.name,
+    level: Number(newSpell.level),
+    school: { name: newSpell.school },
+    classes: newSpell.classes.map((c) => ({ name: c })),
+    casting_time: newSpell.casting_time,
+    range: newSpell.range,
+    duration: newSpell.duration,
+    components: newSpell.components,
+    materialComponents: newSpell.materialComponents,
+    materials: newSpell.materials,
+    damageType: newSpell.damageType,
+    ritual: newSpell.ritual,
+    desc: Array.isArray(newSpell.desc)
+      ? newSpell.desc
+      : [newSpell.desc],
+  };
 
-    const createdSpell = {
-      index: slug,
-      name: newSpell.name,
-      level: Number(newSpell.level),
+  try {
+    const res = await fetch("/api/createSpell", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(spellToSend),
+    });
 
-      school: {
-        name: newSpell.school,
-      },
+    const data = await res.json();
+    console.log("Uploaded:", data);
 
-      classes: newSpell.classes.map((c) => ({
-        name: c,
-      })),
+    // update UI
+    setSpells((prev) => [...prev, spellToSend]);
 
-      casting_time: "1 Action",
-      range: newSpell.range,
-      duration: newSpell.duration,
-      components: newSpell.components,
-
-      desc: [newSpell.desc],
-
-      updated_at: new Date().toISOString(),
-    };
-
-    setSpells((prev) => [...prev, createdSpell]);
-
+    // reset form
     setNewSpell({
       name: "",
       level: 0,
@@ -125,9 +134,14 @@ export default function App() {
       range: "Self",
       duration: "Instantaneous",
       desc: "",
+      materialComponents: false,
+      materials: "",
+      ritual: false,
     });
-  };
-
+  } catch (err) {
+    console.error("Upload failed:", err);
+  }
+};
   /* ------------------ DELETE SPELL ------------------ */
 
   const removeSpell = (index) => {

@@ -1,5 +1,4 @@
 import { Plus } from "lucide-react";
-
 import {
   CLASS_OPTIONS,
   CLASS_COLORS,
@@ -16,142 +15,182 @@ export default function AddSpellForm({
   return (
     <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl mb-8">
 
-      <h2 className="flex items-center gap-2 text-xl mb-4">
+      <h2 className="flex items-center gap-2 text-xl mb-6">
         <Plus /> Add Spell
       </h2>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        {/* NAME  */}
         <input
-          placeholder="Name"
+          placeholder="Spell Name"
           value={newSpell.name}
           onChange={(e) =>
-            setNewSpell((p) => ({
-              ...p,
-              name: e.target.value,
-            }))
+            setNewSpell((p) => ({ ...p, name: e.target.value }))
           }
           className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
         />
 
-        {/* LEVEL */}
         <input
           type="number"
           placeholder="Level"
-          min={0}
-          max={9}
           value={newSpell.level}
           onChange={(e) =>
-            setNewSpell((p) => ({
-              ...p,
-              level: e.target.value,
-            }))
+            setNewSpell((p) => ({ ...p, level: Number(e.target.value) }))
           }
           className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
         />
 
-        {/* SCHOOL */}
         <select
           value={newSpell.school}
           onChange={(e) =>
-            setNewSpell((p) => ({
-              ...p,
-              school: e.target.value,
-            }))
+            setNewSpell((p) => ({ ...p, school: e.target.value }))
           }
           className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
         >
           {SCHOOLS.map((s) => (
-            <option key={s}>
-              {s}
-            </option>
+            <option key={s}>{s}</option>
           ))}
         </select>
 
-        {/* DAMAGE */}
         <select
           value={newSpell.damageType}
           onChange={(e) =>
-            setNewSpell((p) => ({
-              ...p,
-              damageType: e.target.value,
-            }))
+            setNewSpell((p) => ({ ...p, damageType: e.target.value }))
           }
           className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
         >
           {DAMAGE_TYPES.map((d) => (
-            <option key={d}>
-              {d}
-            </option>
+            <option key={d}>{d}</option>
           ))}
         </select>
 
-        {/* DESCRIPTION */}
-        <textarea
-          placeholder="Description"
-          value={newSpell.desc}
+        <input
+          placeholder="Casting Time"
+          value={newSpell.casting_time}
+          onChange={(e) =>
+            setNewSpell((p) => ({ ...p, casting_time: e.target.value }))
+          }
+          className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+        />
+
+        <input
+          placeholder="Range"
+          value={newSpell.range}
+          onChange={(e) =>
+            setNewSpell((p) => ({ ...p, range: e.target.value }))
+          }
+          className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+        />
+
+        <input
+          placeholder="Duration"
+          value={newSpell.duration}
+          onChange={(e) =>
+            setNewSpell((p) => ({ ...p, duration: e.target.value }))
+          }
+          className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+        />
+
+        {/* MATERIALS TOGGLE */}
+        <label className="flex items-center gap-3 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={newSpell.materialComponents}
+            onChange={(e) =>
+              setNewSpell((p) => ({
+                ...p,
+                materialComponents: e.target.checked,
+                materials: e.target.checked ? p.materials : "",
+              }))
+            }
+          />
+          Material Components
+        </label>
+
+        {newSpell.materialComponents && (
+          <input
+            placeholder="Materials"
+            value={newSpell.materials}
+            onChange={(e) =>
+              setNewSpell((p) => ({ ...p, materials: e.target.value }))
+            }
+            className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+          />
+        )}
+
+        {/* COMPONENTS */}
+        <input
+          placeholder="Components (V,S,M)"
+          value={newSpell.components.join(", ")}
           onChange={(e) =>
             setNewSpell((p) => ({
               ...p,
-              desc: e.target.value,
+              components: e.target.value.split(",").map((c) => c.trim()),
             }))
           }
-          className="col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3"
+          className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
+        />
+
+        <label className="flex items-center gap-3 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3">
+          <input
+            type="checkbox"
+            checked={newSpell.ritual}
+            onChange={(e) =>
+              setNewSpell((p) => ({
+                ...p,
+                ritual: e.target.checked,
+              }))
+            }
+          />
+          Ritual
+        </label>
+
+        <textarea
+          placeholder="Description"
+          value={
+            Array.isArray(newSpell.desc)
+              ? newSpell.desc.join("\n\n")
+              : newSpell.desc
+          }
+          onChange={(e) =>
+            setNewSpell((p) => ({
+              ...p,
+              desc: e.target.value.split("\n\n").filter(Boolean),
+            }))
+          }
+          className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-[160px]"
         />
 
         {/* CLASSES */}
-        <div className="col-span-2">
+        <div className="col-span-1 md:col-span-2 flex flex-wrap gap-2">
+          {CLASS_OPTIONS.map((cls) => {
+            const active = newSpell.classes.includes(cls);
+            const color = CLASS_COLORS[cls] || "#6B7280";
 
-          <label className="text-xs text-zinc-400 mb-2 block">
-            Spell Classes
-          </label>
-
-          <div className="flex flex-wrap gap-2">
-
-            {CLASS_OPTIONS.map((cls) => {
-              const active =
-                newSpell.classes.includes(cls);
-
-              const color =
-                CLASS_COLORS[cls] || "#6B7280";
-
-              return (
-                <button
-                  key={cls}
-                  type="button"
-                  onClick={() => toggleClass(cls)}
-                  className="px-3 py-2 rounded-xl border text-sm transition hover:scale-105"
-                  style={{
-                    backgroundColor: active
-                      ? `${color}74`
-                      : "black",
-
-                    border: `1px solid ${color}`,
-
-                    color: "#FFFFFF",
-
-                    boxShadow: active
-                      ? `0 0 12px ${color}55`
-                      : "none",
-                  }}
-                >
-                  {cls}
-                </button>
-              );
-            })}
-
-          </div>
+            return (
+              <button
+                key={cls}
+                type="button"
+                onClick={() => toggleClass(cls)}
+                className="px-3 py-2 rounded-xl border text-sm"
+                style={{
+                  backgroundColor: active ? `${color}55` : "black",
+                  border: `1px solid ${color}`,
+                }}
+              >
+                {cls}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <button
         onClick={addSpell}
-        className="mt-4 bg-purple-600 hover:bg-purple-500 px-6 py-2 rounded-xl"
+        className="mt-6 bg-purple-600 hover:bg-purple-500 px-6 py-2 rounded-xl"
       >
         Create Spell
       </button>
-
     </div>
   );
 }
