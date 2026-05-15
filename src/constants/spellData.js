@@ -36,6 +36,8 @@ export const DAMAGE_TYPES = [
   "Radiant",
   "Slashing",
   "Thunder",
+  "None",
+  "Multiple",
 ];
 
 export const SCHOOLS = [
