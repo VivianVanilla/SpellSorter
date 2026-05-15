@@ -13,6 +13,11 @@ export default async function handler(req, res) {
       .toLowerCase()
       .replaceAll(" ", "-");
 
+      if (spells.some((s) => s.index === newSpell.name.toLowerCase().replaceAll(" ", "-"))) {
+  alert("Spell already exists!");
+  return;
+}
+
     const filePath = `spells/${slug}.json`;
 
     const blob = await put(filePath, JSON.stringify(spell, null, 2), {
