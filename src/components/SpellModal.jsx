@@ -71,8 +71,8 @@ export default function SpellModal({
 )}
 
   {selectedSpell?.ritual === true && (
-  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wide border border-fuchsia-400/40 bg-gradient-to-r from-fuchsia-900/40 to-purple-900/40 text-fuchsia-100 backdrop-blur-sm">
-    ✦ Ritual
+  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs text-black font-bold tracking-wide border border-white-400/40 bg-white/70 backdrop-blur-sm">
+ Ritual
   </span>
 )}
 
