@@ -7,8 +7,8 @@ export default function SpellModal({
   if (!selectedSpell) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-lg bg-zinc-950 border border-zinc-800 rounded-2xl p-6 relative">
+   <div className="fixed inset-0 bg-black/80 overflow-y-auto z-50 p-3 sm:p-6">
+    <div className="w-full max-w-3xl mx-auto my-6 max-h-[90vh] overflow-y-auto bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative">
 
         {/* CLOSE */}
         <button
@@ -71,8 +71,8 @@ export default function SpellModal({
 )}
 
   {selectedSpell?.ritual === true && (
-  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs text-black font-bold tracking-wide border border-white-400/40 bg-white/70 backdrop-blur-sm">
- Ritual
+  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs text-black font-bold tracking-wide border border-white-400/40 bg-white backdrop-blur-sm">
+   Ritual 
   </span>
 )}
 

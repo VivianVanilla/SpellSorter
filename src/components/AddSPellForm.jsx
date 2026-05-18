@@ -72,9 +72,15 @@ export default function AddSpellForm({
   className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
 >
   <option value="">Select Casting Time</option>
-  <option value="1 Action">1 Action</option>
-  <option value="Bonus Action">1 Bonus Action</option>
-  <option value="Reaction">1 Reaction</option>
+  <option value="All">Casting Type</option>
+      <option value="1 Action">Action</option>
+      <option value="Bonus Action">Bonus Action</option>
+      <option value="Reaction">Reaction</option>
+      <option value="1minute">1 Minute</option>
+      <option value="10minute">10 Minute</option>
+      <option value="1hour">1 Hour</option>
+      <option value="24hour">24 Hours</option>
+      <option value="2rounds">2 Rounds</option>
 </select>
 
         <input
