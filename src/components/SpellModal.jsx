@@ -59,8 +59,18 @@ export default function SpellModal({
             {selectedSpell.components?.join(", ")}
           </div>
 
-            {selectedSpell?.ritual === true && (
-  <div className="text-sm text-zinc-500 border border-zinc-600 rounded-lg">
+    
+
+{selectedSpell?.materialComponents === true && (
+  <div className="text-sm text-zinc-500 ">
+    Material Components: 
+    <span>{selectedSpell.materials}</span>
+    
+  </div>
+)}
+
+    {selectedSpell?.ritual === true && (
+  <div className="text-sm text-white bold border border-zinc-600 rounded-lg bg-red-900">
     Ritual
   </div>
 )}
