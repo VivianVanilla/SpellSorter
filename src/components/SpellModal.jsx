@@ -64,17 +64,17 @@ export default function SpellModal({
 {selectedSpell?.materialComponents === true && (
   <div className="text-sm text-zinc-500 ">
     Material Components: 
-    <span>{selectedSpell.materials}</span>
+     
+    <span className="text-white">{selectedSpell.materials}</span>
     
   </div>
 )}
 
-    {selectedSpell?.ritual === true && (
-  <div className="text-sm text-white bold border border-zinc-600 rounded-lg bg-red-900">
-    Ritual
-  </div>
+  {selectedSpell?.ritual === true && (
+  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wide border border-fuchsia-400/40 bg-gradient-to-r from-fuchsia-900/40 to-purple-900/40 text-fuchsia-100 backdrop-blur-sm">
+    ✦ Ritual
+  </span>
 )}
-
 
         </div>
 
