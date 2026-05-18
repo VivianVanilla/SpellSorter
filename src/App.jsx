@@ -46,6 +46,7 @@ export default function App() {
     range: "",
     duration: "",
     desc: "",
+    casting_time: "",
     ctag: "",
     materialComponents: false,
     materials: "",

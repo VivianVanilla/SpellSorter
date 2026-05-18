@@ -1,13 +1,13 @@
 export const CLASS_OPTIONS = [
-  "Wizard",
-  "Sorcerer",
-  "Warlock",
+  "Artificer",
+  "Bard",
   "Cleric",
   "Druid",
-  "Bard",
   "Paladin",
   "Ranger",
-  "Artificer",
+  "Sorcerer",
+  "Warlock",
+  "Wizard",
 ];
 
 export const CLASS_COLORS = {
