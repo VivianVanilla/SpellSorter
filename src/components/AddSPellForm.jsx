@@ -71,7 +71,6 @@ export default function AddSpellForm({
   }
   className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
 >
-  <option value="">Select Casting Time</option>
  
       <option value="1 Action">Action</option>
       <option value="Bonus Action">Bonus Action</option>
