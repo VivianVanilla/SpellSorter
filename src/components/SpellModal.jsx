@@ -7,9 +7,10 @@ export default function SpellModal({
   if (!selectedSpell) return null;
 
   return (
-   <div className="fixed inset-0 bg-black/80 overflow-y-auto z-50 p-3 sm:p-6">
-    <div className="w-full max-w-3xl mx-auto my-6 max-h-[90vh] overflow-y-auto bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative">
-
+   <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50">
+   <div className="w-full max-w-3xl h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+       
+        <div className="h-full overflow-y-auto pr-2">
         {/* CLOSE */}
         <button
           onClick={() => setSelectedSpell(null)}
@@ -63,9 +64,7 @@ export default function SpellModal({
 
 {selectedSpell?.materialComponents === true && (
   <div className="text-sm text-zinc-500 ">
-    Material Components: 
-     
-    <span className="text-white">{selectedSpell.materials}</span>
+    Material Components: <span className="text-white">{selectedSpell.materials}</span>
     
   </div>
 )}
@@ -118,7 +117,7 @@ export default function SpellModal({
     </span>
   )}
 </div>
-
+</div>
       </div>
     </div>
   );
