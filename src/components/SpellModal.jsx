@@ -7,8 +7,14 @@ export default function SpellModal({
   if (!selectedSpell) return null;
 
   return (
-   <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50">
-   <div className="w-full max-w-3xl h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+    <div
+      className="fixed inset-0 bg-black/70 flex items-center justify-center"
+      onClick={() => setSelectedSpell(null)} // 
+    >
+      <div
+        className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl max-w-lg w-full"
+        onClick={(e) => e.stopPropagation()} // 
+      >
        
         <div className="h-full overflow-y-auto pr-2">
         {/* CLOSE */}
