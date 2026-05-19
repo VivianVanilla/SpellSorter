@@ -76,9 +76,10 @@ const [editingIndex, setEditingIndex] = useState(null);
     spells,
     filters,
     selectedClasses,
-    search
+    search,
+    selectedLevels
   );
-}, [spells, filters, selectedClasses, search]);
+}, [spells, filters, selectedClasses, search, selectedLevels]);
 
   /* ------------------ CLASS TOGGLE ------------------ */
 

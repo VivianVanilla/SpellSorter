@@ -14,7 +14,6 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
     );
   }
 
-
   if (filters.school !== "All") {
     list = list.filter((s) => s.school?.name === filters.school);
   }
