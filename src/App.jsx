@@ -142,6 +142,8 @@ const addSpell = async () => {
       components: ["V"],
       range: "",
       duration: "",
+      casting_time: "1 Action",
+      ctag: "",
       desc: "",
       materialComponents: false,
       materials: "",
