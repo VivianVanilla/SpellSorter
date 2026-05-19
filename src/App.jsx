@@ -48,7 +48,7 @@ const [editingIndex, setEditingIndex] = useState(null);
     range: "",
     duration: "",
     desc: "",
-    casting_time: "",
+    casting_time: "1 Action",
     ctag: "",
     materialComponents: false,
     materials: "",
