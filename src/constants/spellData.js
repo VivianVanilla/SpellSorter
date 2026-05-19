@@ -54,6 +54,7 @@ export const SCHOOLS = [
 ];
 
 export const CASTING= [
+  "Empty",
   "1 Action",
   "Bonus Action",
   "Reaction",
