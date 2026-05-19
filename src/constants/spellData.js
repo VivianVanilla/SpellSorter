@@ -42,6 +42,7 @@ export const DAMAGE_TYPES = [
 
 export const SCHOOLS = [
   "Abjuration",
+  "Chronomancy",
   "Conjuration",
   "Divination",
   "Enchantment",
@@ -51,4 +52,18 @@ export const SCHOOLS = [
   "Transmutation",
   "Graviturgy",
   "Other"
+];
+
+export const CASTING= [
+  "None",
+  "1 Action",
+  "Bonus Action",
+  "Reaction",
+  "1 Minute",
+  "10 Minutes",
+  "1 Hour",
+  "8 Hours",
+  "24 Hours",
+  "12 Hours",
+  "2 Rounds",
 ];

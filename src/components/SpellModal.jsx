@@ -1,4 +1,8 @@
 import { CLASS_COLORS } from "../constants/spellData";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+
 
 export default function SpellModal({
   selectedSpell,
@@ -7,9 +11,15 @@ export default function SpellModal({
   if (!selectedSpell) return null;
 
   return (
-   <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50">
-   <div className="w-full max-w-3xl h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
-       
+   <div
+      className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50"
+      onClick={() => setSelectedSpell(null)} // 👈 click outside closes
+    >
+      <div
+        className="w-full max-w-3xl h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative overflow-hidden"
+        onClick={(e) => e.stopPropagation()} // 👈 prevents closing when clicking inside
+      >
+
         <div className="h-full overflow-y-auto pr-2">
         {/* CLOSE */}
         <button
@@ -77,14 +87,78 @@ export default function SpellModal({
 
         </div>
 
-        {/* DESCRIPTION */}
-        <div className="text-zinc-200 leading-relaxed mb-4">
-          {selectedSpell.desc?.map((d, i) => (
-            <p key={i} className="mb-2">
-              {d}
-            </p>
-          ))}
-        </div>
+      
+{/* DESCRIPTION */}
+<div className="text-zinc-200 leading-relaxed mb-4">
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm]}
+    components={{
+      p: ({ children }) => (
+        <p className="text-md text-zinc-300 mb-2">
+          {children}
+        </p>
+      ),
+
+      h1: ({ children }) => (
+        <h1 className="text-xl font-bold mb-2">
+          {children}
+        </h1>
+      ),
+
+      h2: ({ children }) => (
+        <h2 className="text-lg font-semibold mb-2">
+          {children}
+        </h2>
+      ),
+
+      ul: ({ children }) => (
+        <ul className="list-disc pl-6 mb-3">
+          {children}
+        </ul>
+      ),
+
+      ol: ({ children }) => (
+        <ol className="list-decimal pl-6 mb-3">
+          {children}
+        </ol>
+      ),
+
+      li: ({ children }) => (
+        <li className="mb-1">
+          {children}
+        </li>
+      ),
+
+      table: ({ children }) => (
+        <table className="w-full border border-zinc-700 text-sm my-3">
+          {children}
+        </table>
+      ),
+
+      th: ({ children }) => (
+        <th className="border border-zinc-700 px-2 py-1 bg-zinc-900">
+          {children}
+        </th>
+      ),
+
+      td: ({ children }) => (
+        <td className="border border-zinc-800 px-2 py-1">
+          {children}
+        </td>
+      ),
+
+      code: ({ children }) => (
+        <code className="bg-zinc-900 px-1 py-0.5 rounded text-purple-300">
+          {children}
+        </code>
+      ),
+    }}
+  >
+    {Array.isArray(selectedSpell.desc)
+      ? selectedSpell.desc.join("\n")
+      : selectedSpell.desc}
+  </ReactMarkdown>
+</div>
 
         {/* CLASSES */}
         <div className="flex flex-wrap gap-2">

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Plus, Shield, Pencil, Sparkles, Search } from "lucide-react";
-import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS } from "./constants/spellData";
+import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS, CASTING } from "./constants/spellData";
 import { filterSpells } from "./utils/filterSpells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
 import LevelMultiSelect from "./components/LevelMultiSelect";
@@ -9,17 +9,19 @@ import SpellCard from "./components/SpellCard";
 import AddSpellForm from "./components/AddSPellForm";
 import { useEffect } from "react";
 
-
 /* ------------------ APP ------------------ */
 
 export default function App() {
   const [spells, setSpells] = useState([]);
 
+
+  
  useEffect(() => {
   fetch("/api/getSpells")
     .then((r) => r.json())
     .then(setSpells);
 }, []);
+
 
   const [filters, setFilters] = useState({
   level: "All",
@@ -31,7 +33,7 @@ export default function App() {
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [selectedLevels, setSelectedLevels] = useState([]);
   const [search, setSearch] = useState("");
-
+const [editingIndex, setEditingIndex] = useState(null);
   
 
   const [selectedSpell, setSelectedSpell] = useState(null);
@@ -48,7 +50,7 @@ export default function App() {
     range: "",
     duration: "",
     desc: "",
-    casting_time: "1 Action",
+    casting_time: "None",
     ctag: "",
     materialComponents: false,
     materials: "",
@@ -142,6 +144,8 @@ const addSpell = async () => {
       components: ["V"],
       range: "",
       duration: "",
+      casting_time: "None",
+      ctag: "",
       desc: "",
       materialComponents: false,
       materials: "",
@@ -151,11 +155,30 @@ const addSpell = async () => {
     console.error("Upload failed:", err);
   }
 };
-  /* ------------------ DELETE SPELL ------------------ */
+  /* ------------------ EDIT SPELL ------------------ */
 
-  const removeSpell = (index) => {
-    setSpells((prev) => prev.filter((s) => s.index !== index));
-  };
+ const handleEditSpell = (spell) => {
+  setAdminMode(true);
+
+  setEditingIndex(spell.index); 
+
+  setNewSpell({
+    name: spell.name || "",
+    level: spell.level || 0,
+    school: spell.school?.name || "Evocation",
+    classes: spell.classes?.map((c) => c.name) || [],
+    damageType: spell.damageType || "Fire",
+    components: spell.components || ["V"],
+    range: spell.range || "",
+    duration: spell.duration || "",
+    desc: Array.isArray(spell.desc) ? spell.desc.join("\n") : "",
+    casting_time: spell.casting_time || "",
+    ctag: spell.ctag || "",
+    materialComponents: spell.materialComponents || false,
+    materials: spell.materials || "",
+    ritual: spell.ritual || false,
+  });
+};
 
 
   /* ------------------ GROUP BY LEVEL ------------------ */
@@ -275,23 +298,20 @@ const addSpell = async () => {
 
     {/* CASTING TIME */}
     <select
-      value={filters.casting_time}
-      onChange={(e) =>
-        setFilters((f) => ({ ...f, casting_time: e.target.value }))
-      }
-      className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
-    >
-      <option value="All">Casting Type</option>
-      <option value="1 Action">Action</option>
-      <option value="Bonus Action">Bonus Action</option>
-      <option value="Reaction">Reaction</option>
-      <option value="1minute">1 Minute</option>
-      <option value="10minute">10 Minute</option>
-      <option value="1hour">1 Hour</option>
-      <option value="24hour">24 Hours</option>
-      <option value="2rounds">2 Rounds</option>
+  value={filters.casting_time}
+  onChange={(e) =>
+    setFilters((f) => ({ ...f, casting_time: e.target.value }))
+  }
+  className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
+>
+  <option value="All">Casting Type</option>
 
-    </select>
+  {CASTING.map((t) => (
+    <option key={t} value={t}>
+      {t}
+    </option>
+  ))}
+</select>
 
     {/* DAMAGE TYPE */}
     <select
@@ -311,6 +331,8 @@ const addSpell = async () => {
 
   </div>
 </div>
+
+
 
         {/* CREATE SPELL */}
         
@@ -337,8 +359,8 @@ const addSpell = async () => {
             key={spell.index}
             spell={spell}
             adminMode={adminMode}
-            removeSpell={removeSpell}
             setSelectedSpell={setSelectedSpell}
+             onEdit={handleEditSpell}
           />
         ))}
       </div>
