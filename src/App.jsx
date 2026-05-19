@@ -314,12 +314,13 @@ const addSpell = async () => {
       <option value="1 Action">Action</option>
       <option value="Bonus Action">Bonus Action</option>
       <option value="Reaction">Reaction</option>
-      <option value="1minute">1 Minute</option>
-      <option value="10minute">10 Minutes</option>
-      <option value="1hour">1 Hour</option>
-      <option value="24hour">24 Hours</option>
-      <option value="12hour">12 Hours</option>
-      <option value="2rounds">2 Rounds</option>
+      <option value="1 Minute">1 Minute</option>
+      <option value="10 Minutes">10 Minutes</option>
+      <option value="1 Hour">1 Hour</option>
+      <option value="24 Hours">24 Hours</option>
+      <option value="12 Hours">12 Hours</option>
+      <option value="8 Hours">8 Hours</option>
+      <option value="2 Rounds">2 Rounds</option>
 
     </select>
 
