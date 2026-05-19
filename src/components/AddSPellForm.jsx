@@ -79,6 +79,7 @@ export default function AddSpellForm({
       <option value="10minute">10 Minute</option>
       <option value="1hour">1 Hour</option>
       <option value="24hour">24 Hours</option>
+      <option value="12hour">12 Hours</option>
       <option value="2rounds">2 Rounds</option>
 </select>
 
@@ -183,7 +184,7 @@ export default function AddSpellForm({
       desc: e.target.value,
     }))
   }
-  className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-[160px]"
+  className="col-span-1 md:col-span-2 bg-zinc-900 border border-zinc-700 rounded-xl p-3 min-h-40"
 />
 
         {/* CLASSES */}

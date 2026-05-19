@@ -7,18 +7,34 @@ import SpellModal from "./components/SpellModal";
 import SpellCard from "./components/SpellCard";
 import AddSpellForm from "./components/AddSPellForm";
 import { useEffect } from "react";
-
+import testSpell from "./data/testspells.json";
 
 /* ------------------ APP ------------------ */
 
 export default function App() {
   const [spells, setSpells] = useState([]);
 
- useEffect(() => {
+
+  
+useEffect(() => {
   fetch("/api/getSpells")
     .then((r) => r.json())
-    .then(setSpells);
+    .then((data) => {
+      const apiSpells = Array.isArray(data) ? data : data.spells || [];
+
+      setSpells([
+        ...apiSpells,
+        testSpell, // <- your JSON spell
+      ]);
+    })
+    .catch((err) => {
+      console.error("Failed to load spells:", err);
+      setSpells([testSpell]); // fallback so UI still works
+    });
 }, []);
+
+
+
 
   const [filters, setFilters] = useState({
   level: "All",
@@ -46,7 +62,7 @@ export default function App() {
     range: "",
     duration: "",
     desc: "",
-    casting_time: "1 Action",
+    casting_time: "Action",
     ctag: "",
     materialComponents: false,
     materials: "",
@@ -149,11 +165,30 @@ const addSpell = async () => {
     console.error("Upload failed:", err);
   }
 };
-  /* ------------------ DELETE SPELL ------------------ */
+  /* ------------------ EDIT SPELL ------------------ */
 
-  const removeSpell = (index) => {
-    setSpells((prev) => prev.filter((s) => s.index !== index));
-  };
+ const handleEditSpell = (spell) => {
+  setAdminMode(true);
+
+  setEditingIndex(spell.index); // optional but recommended
+
+  setNewSpell({
+    name: spell.name || "",
+    level: spell.level || 0,
+    school: spell.school?.name || "Evocation",
+    classes: spell.classes?.map((c) => c.name) || [],
+    damageType: spell.damageType || "Fire",
+    components: spell.components || ["V"],
+    range: spell.range || "",
+    duration: spell.duration || "",
+    desc: Array.isArray(spell.desc) ? spell.desc.join("\n") : "",
+    casting_time: spell.casting_time || "1 Action",
+    ctag: spell.ctag || "",
+    materialComponents: spell.materialComponents || false,
+    materials: spell.materials || "",
+    ritual: spell.ritual || false,
+  });
+};
 
 
   /* ------------------ GROUP BY LEVEL ------------------ */
@@ -293,9 +328,10 @@ const addSpell = async () => {
       <option value="Bonus Action">Bonus Action</option>
       <option value="Reaction">Reaction</option>
       <option value="1minute">1 Minute</option>
-      <option value="10minute">10 Minute</option>
+      <option value="10minute">10 Minutes</option>
       <option value="1hour">1 Hour</option>
       <option value="24hour">24 Hours</option>
+      <option value="12hour">12 Hours</option>
       <option value="2rounds">2 Rounds</option>
 
     </select>
@@ -318,6 +354,10 @@ const addSpell = async () => {
 
   </div>
 </div>
+
+ {/* Edit SPELL */}
+
+ 
 
         {/* CREATE SPELL */}
         
@@ -344,8 +384,8 @@ const addSpell = async () => {
             key={spell.index}
             spell={spell}
             adminMode={adminMode}
-            removeSpell={removeSpell}
             setSelectedSpell={setSelectedSpell}
+             onEdit={handleEditSpell}
           />
         ))}
       </div>

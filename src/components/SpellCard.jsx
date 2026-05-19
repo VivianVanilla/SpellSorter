@@ -3,16 +3,34 @@ import { CLASS_COLORS } from "../constants/spellData";
 export default function SpellCard({
   spell,
   adminMode,
-  removeSpell,
   setSelectedSpell,
+   onEdit,
 }) {
   return (
     <div
       onClick={() => setSelectedSpell(spell)}
       className="bg-zinc-950 border border-zinc-800 p-4 rounded-2xl cursor-pointer hover:border-zinc-600 transition"
     >
-      <div className="grid gap-3">
-        <h3 className="font-bold">{spell.name}</h3>
+      
+      <div className="grid  gap-3">
+
+       <div className="flex justify-between items-center gap-3">
+  <h3 className="font-bold">{spell.name}</h3>
+
+
+     {adminMode && (
+  <button
+  onClick={(e) => {
+    e.stopPropagation();
+    onEdit(spell);
+  }}
+  className="font-bold text-amber-700 hover:text-amber-100 border-amber-700 hover:border-amber-100 border rounded-2xl px-2 py-1"
+>
+  Edit
+</button>
+     )}
+
+</div>
 
         <div className="text-sm text-zinc-400 mb-2">
           <div>
