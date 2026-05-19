@@ -42,6 +42,7 @@ export const DAMAGE_TYPES = [
 
 export const SCHOOLS = [
   "Abjuration",
+  "Chronomancy",
   "Conjuration",
   "Divination",
   "Enchantment",
