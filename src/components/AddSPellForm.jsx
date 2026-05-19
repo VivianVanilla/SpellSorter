@@ -4,6 +4,7 @@ import {
   CLASS_COLORS,
   DAMAGE_TYPES,
   SCHOOLS,
+  CASTING,
 } from "../constants/spellData";
 
 export default function AddSpellForm({
@@ -71,19 +72,11 @@ export default function AddSpellForm({
   }
   className="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2"
 >
- 
-       <option value="All">Casting Type</option>
-      <option value="1 Action">Action</option>
-      <option value="Bonus Action">Bonus Action</option>
-      <option value="Reaction">Reaction</option>
-      <option value="1 Minute">1 Minute</option>
-      <option value="10 Minutes">10 Minutes</option>
-      <option value="1 Hour">1 Hour</option>
-      <option value="24 Hours">24 Hours</option>
-      <option value="12 Hours">12 Hours</option>
-      <option value="8 Hours">8 Hours</option>
-      <option value="2 Rounds">2 Rounds</option>
-      
+  {CASTING.map((t) => (
+    <option key={t} value={t}>
+      {t}
+    </option>
+  ))}
 </select>
 
         <input

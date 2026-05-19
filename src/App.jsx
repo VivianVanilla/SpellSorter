@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Plus, Shield, Pencil, Sparkles, Search } from "lucide-react";
-import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS } from "./constants/spellData";
+import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS, CASTING } from "./constants/spellData";
 import { filterSpells } from "./utils/filterSpells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
 import SpellModal from "./components/SpellModal";
@@ -49,7 +49,7 @@ const [editingIndex, setEditingIndex] = useState(null);
     range: "",
     duration: "",
     desc: "",
-    casting_time: "Action",
+    casting_time: "1 Action",
     ctag: "",
     materialComponents: false,
     materials: "",
@@ -304,25 +304,20 @@ const addSpell = async () => {
 
     {/* CASTING TIME */}
     <select
-      value={filters.casting_time}
-      onChange={(e) =>
-        setFilters((f) => ({ ...f, casting_time: e.target.value }))
-      }
-      className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
-    >
-      <option value="All">Casting Type</option>
-      <option value="1 Action">Action</option>
-      <option value="Bonus Action">Bonus Action</option>
-      <option value="Reaction">Reaction</option>
-      <option value="1 Minute">1 Minute</option>
-      <option value="10 Minutes">10 Minutes</option>
-      <option value="1 Hour">1 Hour</option>
-      <option value="24 Hours">24 Hours</option>
-      <option value="12 Hours">12 Hours</option>
-      <option value="8 Hours">8 Hours</option>
-      <option value="2 Rounds">2 Rounds</option>
+  value={filters.casting_time}
+  onChange={(e) =>
+    setFilters((f) => ({ ...f, casting_time: e.target.value }))
+  }
+  className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
+>
+  <option value="All">Casting Type</option>
 
-    </select>
+  {CASTING.map((t) => (
+    <option key={t} value={t}>
+      {t}
+    </option>
+  ))}
+</select>
 
     {/* DAMAGE TYPE */}
     <select
