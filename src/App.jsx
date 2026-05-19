@@ -3,6 +3,7 @@ import { Plus, Shield, Pencil, Sparkles, Search } from "lucide-react";
 import { CLASS_COLORS, CLASS_OPTIONS, DAMAGE_TYPES, SCHOOLS } from "./constants/spellData";
 import { filterSpells } from "./utils/filterSpells";
 import ClassMultiSelect from "./components/ClassMultiSelect";
+import LevelMultiSelect from "./components/LevelMultiSelect";
 import SpellModal from "./components/SpellModal";
 import SpellCard from "./components/SpellCard";
 import AddSpellForm from "./components/AddSPellForm";
@@ -28,6 +29,7 @@ export default function App() {
 });
 
   const [selectedClasses, setSelectedClasses] = useState([]);
+  const [selectedLevels, setSelectedLevels] = useState([]);
   const [search, setSearch] = useState("");
 
   
@@ -237,32 +239,23 @@ const addSpell = async () => {
     />
   </div>
 
-   {/* CLASS FILTER (UGLY BUT FUNCTIONAL) */}
+   {/* CLASS FILTER */}
 <ClassMultiSelect
-  selectedClasses={selectedClasses}
-  setSelectedClasses={setSelectedClasses}
+    selectedClasses={selectedClasses}
+    setSelectedClasses={setSelectedClasses}
 />
+
+  <LevelMultiSelect
+    selectedLevels={selectedLevels}
+    setSelectedLevels={setSelectedLevels}
+  />
 
   {/* FILTERS */}
   <div className="flex flex-wrap gap-2">
 
     
 
-    {/* LEVEL */}
-    <select
-      value={filters.level}
-      onChange={(e) =>
-        setFilters((f) => ({ ...f, level: e.target.value }))
-      }
-      className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
-    >
-      <option value="All">All Levels</option>
-      {[0,1,2,3,4,5,6,7,8,9].map((lvl) => (
-        <option key={lvl} value={String(lvl)}>
-          Level {lvl}
-        </option>
-      ))}
-    </select>
+
 
     {/* SCHOOL */}
     <select
