@@ -7,15 +7,15 @@ export default function SpellModal({
   if (!selectedSpell) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black/70 flex items-center justify-center"
-      onClick={() => setSelectedSpell(null)} // 
+   <div
+      className="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50"
+      onClick={() => setSelectedSpell(null)} // 👈 click outside closes
     >
       <div
-        className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl max-w-lg w-full"
-        onClick={(e) => e.stopPropagation()} // 
+        className="w-full max-w-3xl h-[90vh] bg-zinc-950 border border-zinc-800 rounded-2xl p-4 sm:p-6 relative overflow-hidden"
+        onClick={(e) => e.stopPropagation()} // 👈 prevents closing when clicking inside
       >
-       
+
         <div className="h-full overflow-y-auto pr-2">
         {/* CLOSE */}
         <button
