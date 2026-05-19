@@ -60,7 +60,7 @@ const [editingIndex, setEditingIndex] = useState(null);
 
   
 
-  /* ------------------ ADMIN LOGIN ------------------ */
+  /* ------------------ ADMIN LOGIN ----------------- */
 
   const handleAdminLogin = () => {
     if (passwordInput === "archmage") {
