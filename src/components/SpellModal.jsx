@@ -94,7 +94,7 @@ export default function SpellModal({
     remarkPlugins={[remarkGfm]}
     components={{
       p: ({ children }) => (
-        <p className="text-sm text-zinc-300 mb-2">
+        <p className="text-md text-zinc-300 mb-2">
           {children}
         </p>
       ),
