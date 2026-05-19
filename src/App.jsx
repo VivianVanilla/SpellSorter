@@ -7,7 +7,6 @@ import SpellModal from "./components/SpellModal";
 import SpellCard from "./components/SpellCard";
 import AddSpellForm from "./components/AddSPellForm";
 import { useEffect } from "react";
-import testSpell from "./data/testspells.json";
 
 /* ------------------ APP ------------------ */
 
