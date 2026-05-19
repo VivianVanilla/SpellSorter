@@ -32,7 +32,7 @@ export default function App() {
 
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [search, setSearch] = useState("");
-
+const [editingIndex, setEditingIndex] = useState(null);
   
 
   const [selectedSpell, setSelectedSpell] = useState(null);
@@ -157,7 +157,7 @@ const addSpell = async () => {
  const handleEditSpell = (spell) => {
   setAdminMode(true);
 
-  setEditingIndex(spell.index); // optional but recommended
+  setEditingIndex(spell.index); 
 
   setNewSpell({
     name: spell.name || "",
@@ -342,9 +342,7 @@ const addSpell = async () => {
   </div>
 </div>
 
- {/* Edit SPELL */}
 
- 
 
         {/* CREATE SPELL */}
         
