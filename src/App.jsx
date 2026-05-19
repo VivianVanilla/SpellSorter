@@ -16,24 +16,11 @@ export default function App() {
 
 
   
-useEffect(() => {
+ useEffect(() => {
   fetch("/api/getSpells")
     .then((r) => r.json())
-    .then((data) => {
-      const apiSpells = Array.isArray(data) ? data : data.spells || [];
-
-      setSpells([
-        ...apiSpells,
-        testSpell, // <- your JSON spell
-      ]);
-    })
-    .catch((err) => {
-      console.error("Failed to load spells:", err);
-      setSpells([testSpell]); // fallback so UI still works
-    });
+    .then(setSpells);
 }, []);
-
-
 
 
   const [filters, setFilters] = useState({
