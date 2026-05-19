@@ -1,5 +1,5 @@
 
-export function filterSpells(spells, filters, selectedClasses, search) {
+export function filterSpells(spells, filters, selectedClasses, search, selectedLevels) {
   let list = [...spells];
 
   if (search.trim()) {
@@ -8,9 +8,12 @@ export function filterSpells(spells, filters, selectedClasses, search) {
     );
   }
 
-  if (filters.level !== "All") {
-    list = list.filter((s) => String(s.level) === filters.level);
+    if (selectedLevels.length > 0) {
+    list = list.filter((s) =>
+      selectedLevels.includes(s.level)
+    );
   }
+
 
   if (filters.school !== "All") {
     list = list.filter((s) => s.school?.name === filters.school);
