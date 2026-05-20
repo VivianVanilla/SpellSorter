@@ -2,7 +2,9 @@ import { list } from "@vercel/blob";
 
 export default async function handler(req, res) {
   try {
-    const { blobs } = await list();
+    const { blobs } = await list({
+      prefix: "spells/",
+    });
 
     console.log("ALL BLOBS FOUND:", blobs);
 
