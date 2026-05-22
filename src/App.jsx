@@ -350,7 +350,7 @@ const addSpell = async () => {
 <div className="space-y-10 mt-8">
   {Object.entries(grouped).map(([level, spells]) => (
     <section key={level}>
-      <h2 className="text-xl mb-4 border-b border-zinc-800 pb-2">
+      <h2 className="text-2xl mb-4 border-b border-zinc-800 pb-2">
         {level === "0" ? "Cantrips" : `Level ${level}`}
       </h2>
 
