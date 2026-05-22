@@ -1,5 +1,5 @@
 
-export function filterSpells(spells, filters, selectedClasses, search, selectedLevels) {
+export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter) {
   let list = [...spells];
 
   if (search.trim()) {
@@ -33,6 +33,19 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
       spell.classes?.some((c) =>
         selectedClasses.includes(c.name)
       )
+    );
+  }
+
+    if (concentrationFilter === "Concentration") {
+    list = list.filter((spell) =>
+      spell.duration?.toLowerCase().includes("con")
+    );
+  }
+
+  if (concentrationFilter === "No Concentration") {
+    list = list.filter(
+      (spell) =>
+        !spell.duration?.toLowerCase().includes("con")
     );
   }
 

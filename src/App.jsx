@@ -33,6 +33,9 @@ export default function App() {
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [selectedLevels, setSelectedLevels] = useState([]);
   const [search, setSearch] = useState("");
+  const [concentrationFilter, setConcentrationFilter] = useState("All");
+ const [open, setOpen] = useState(false);
+
 const [editingIndex, setEditingIndex] = useState(null);
   
 
@@ -77,9 +80,10 @@ const [editingIndex, setEditingIndex] = useState(null);
     filters,
     selectedClasses,
     search,
-    selectedLevels
+    selectedLevels,
+    concentrationFilter
   );
-}, [spells, filters, selectedClasses, search, selectedLevels]);
+}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter]);
 
   /* ------------------ CLASS TOGGLE ------------------ */
 
@@ -211,10 +215,10 @@ const addSpell = async () => {
 
 
         {/* ADMIN */}
-        <div className="mt-auto pt-6">
+        <div className="hidden md:block mt-auto pt-6">
           {!adminMode ? (
             <>
-              <div className="text-sm text-zinc-400 flex items-center gap-2 mb-2">
+              <div className=" text-sm text-zinc-400 flex items-center gap-2 mb-2">
                 <Shield size={16} />
                 Admin Mode
               </div>
@@ -262,6 +266,25 @@ const addSpell = async () => {
       className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-10 py-3"
     />
   </div>
+
+  {/* Collapsable on mobile */}
+
+<button
+  onClick={() => setOpen(!open)}
+  className="md:hidden w-full bg-zinc-900 hover:bg-zinc-700 border border-zinc-800 rounded-xl px-4 py-3"
+>
+  Filters
+</button>
+
+
+<div   className={`
+    ${open ? "flex" : "hidden"}
+    md:flex
+    flex-wrap
+    gap-2
+  `}>
+
+
 
    {/* CLASS FILTER */}
 <ClassMultiSelect
@@ -330,8 +353,30 @@ const addSpell = async () => {
       ))}
     </select>
 
+    
+<select
+  value={concentrationFilter}
+  onChange={(e) =>
+    setConcentrationFilter(e.target.value)
+  }
+  className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
+>
+  <option value="All">All</option>
+  <option value="Concentration">
+    Concentration Only
+  </option>
+  <option value="No Concentration">
+    No Concentration
+  </option>
+</select>
+
+
   </div>
 </div>
+</div>
+     
+      
+    
 
 
 
