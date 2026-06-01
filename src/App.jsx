@@ -282,12 +282,11 @@ const addSpell = async () => {
 <div   className={`
     ${open ? "flex" : "hidden"}
     flex
-    md:flex-none
-    sm:flex-wrap
+    md:flex-wrap
     gap-2
   `}>
 
-
+  <div className="flex flex-wrap gap-2">
 
    {/* CLASS FILTER */}
 <ClassMultiSelect
@@ -300,8 +299,7 @@ const addSpell = async () => {
     setSelectedLevels={setSelectedLevels}
   />
 
-  {/* FILTERS */}
-  <div className="flex flex-wrap gap-2">
+
 
     
 
@@ -376,7 +374,7 @@ const addSpell = async () => {
 <select
   value={campaignTag}
   onChange={(e) =>
-    setCampaignTag(e.target.value)
+   setFilters((f) => ({ ...f, ctag: e.target.value }))
   }
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >

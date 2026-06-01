@@ -55,11 +55,11 @@ export default function LevelMultiSelect({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full md:w-72">
+    <div className="relative w-full md:w-72">
       <button
         onClick={() => setOpen(!open)}
-        className={`w-full rounded-xl px-4 py-3 text-left transition ${open ? "bg-zinc-700 border-zinc-700" : "bg-zinc-900 border border-zinc-800"}`}
-        aria-expanded={open}
+        className={`w-full rounded-xl px-4 py-3 text-left  ${open ? "bg-zinc-700 border-zinc-700 " : "bg-zinc-900 border border-zinc-800"}`}
+        
       >
         {selectedLevels.length === 0
           ? "All Levels"
@@ -67,10 +67,7 @@ export default function LevelMultiSelect({
       </button>
 
       {open && (
-        <div
-          ref={dropdownRef}
-          className={`absolute z-50 w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-3 shadow-2xl transition ${dropdownDirection === "up" ? "bottom-full mb-2" : "top-full mt-2"}`}
-        >
+        <div className="absolute z-50 mt-2 w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-3 shadow-2xl">
           <div className="flex flex-wrap gap-2">
             {LevelOptions.map((lvl) => {
               const active = selectedLevels.includes(lvl);
