@@ -34,6 +34,7 @@ export default function App() {
   const [selectedLevels, setSelectedLevels] = useState([]);
   const [search, setSearch] = useState("");
   const [concentrationFilter, setConcentrationFilter] = useState("All");
+  const [campaignTag, setCampaignTag] = useState("All");
  const [open, setOpen] = useState(false);
 
 const [editingIndex, setEditingIndex] = useState(null);
@@ -81,9 +82,10 @@ const [editingIndex, setEditingIndex] = useState(null);
     selectedClasses,
     search,
     selectedLevels,
-    concentrationFilter
+    concentrationFilter,
+    campaignTag
   );
-}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter]);
+}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag]);
 
   /* ------------------ CLASS TOGGLE ------------------ */
 
@@ -279,8 +281,9 @@ const addSpell = async () => {
 
 <div   className={`
     ${open ? "flex" : "hidden"}
-    md:flex
-    flex-wrap
+    flex
+    md:flex-none
+    sm:flex-wrap
     gap-2
   `}>
 
@@ -361,7 +364,7 @@ const addSpell = async () => {
   }
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
-  <option value="All">All</option>
+  <option value="All">Concentration Filter</option>
   <option value="Concentration">
     Concentration Only
   </option>
@@ -370,6 +373,24 @@ const addSpell = async () => {
   </option>
 </select>
 
+<select
+  value={campaignTag}
+  onChange={(e) =>
+    setCampaignTag(e.target.value)
+  }
+  className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
+>
+  <option value="All">Campaign Tag </option>
+  <option value="Twilight">
+    Twilight
+  </option>
+  <option value="Special-Banned">
+    Special/Banned
+  </option>
+  <option value="Squain">
+    Squain
+  </option>
+</select>
 
   </div>
 </div>

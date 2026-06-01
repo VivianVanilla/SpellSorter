@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const LevelOptions = [0,1,2,3,4,5,6,7,8,9];
 
@@ -20,6 +20,31 @@ export default function LevelMultiSelect({
   setSelectedLevels,
 }) {
   const [open, setOpen] = useState(false);
+  const [dropdownDirection, setDropdownDirection] = useState("down");
+  const containerRef = useRef(null);
+  const dropdownRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (!open || !containerRef.current || !dropdownRef.current) return;
+
+    const updateDirection = () => {
+      if (!containerRef.current || !dropdownRef.current) return;
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const dropdownHeight = dropdownRef.current.offsetHeight;
+      const spaceBelow = window.innerHeight - containerRect.bottom;
+      const spaceAbove = containerRect.top;
+
+      setDropdownDirection(
+        spaceBelow < dropdownHeight && spaceAbove > dropdownHeight
+          ? "up"
+          : "down"
+      );
+    };
+
+    updateDirection();
+    window.addEventListener("resize", updateDirection);
+    return () => window.removeEventListener("resize", updateDirection);
+  }, [open, selectedLevels]);
 
   const toggleLevel = (lvl) => {
     setSelectedLevels((prev) =>
@@ -30,10 +55,11 @@ export default function LevelMultiSelect({
   };
 
   return (
-    <div className="relative w-full md:w-72">
+    <div ref={containerRef} className="relative w-full md:w-72">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-left"
+        className={`w-full rounded-xl px-4 py-3 text-left transition ${open ? "bg-zinc-700 border-zinc-700" : "bg-zinc-900 border border-zinc-800"}`}
+        aria-expanded={open}
       >
         {selectedLevels.length === 0
           ? "All Levels"
@@ -41,7 +67,10 @@ export default function LevelMultiSelect({
       </button>
 
       {open && (
-        <div className="absolute z-50 mt-2 w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-3 shadow-2xl">
+        <div
+          ref={dropdownRef}
+          className={`absolute z-50 w-full bg-zinc-950 border border-zinc-800 rounded-2xl p-3 shadow-2xl transition ${dropdownDirection === "up" ? "bottom-full mb-2" : "top-full mt-2"}`}
+        >
           <div className="flex flex-wrap gap-2">
             {LevelOptions.map((lvl) => {
               const active = selectedLevels.includes(lvl);

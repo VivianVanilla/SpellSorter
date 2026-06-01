@@ -22,7 +22,8 @@ export default function ClassMultiSelect({
     <div className="relative w-full md:w-72">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-left"
+        className={`w-full rounded-xl px-4 py-3 text-left transition ${open ? "bg-zinc-800 border-zinc-700 ring-1 ring-zinc-700" : "bg-zinc-900 border border-zinc-800"}`}
+        
       >
         {selectedClasses.length === 0
           ? "All Classes"
