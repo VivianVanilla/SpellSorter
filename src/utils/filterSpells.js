@@ -1,5 +1,5 @@
 
-export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter) {
+export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag) {
   let list = [...spells];
 
   if (search.trim()) {
@@ -47,6 +47,10 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
       (spell) =>
         !spell.duration?.toLowerCase().includes("con")
     );
+  }
+
+  if (campaignTag !== "All") {
+    list = list.filter((spell) => spell.ctag === campaignTag);
   }
 
   return list.sort(

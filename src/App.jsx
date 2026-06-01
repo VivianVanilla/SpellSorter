@@ -280,13 +280,13 @@ const addSpell = async () => {
 
 
 <div   className={`
-    ${open ? "flex" : "hidden"}
+    ${open ? "" : "hidden md:block"}
     flex
     md:flex-wrap
     gap-2
   `}>
 
-  <div className="flex flex-wrap gap-2">
+  <div className="flex flex-wrap md:flex-nowrap gap-2">
 
    {/* CLASS FILTER */}
 <ClassMultiSelect
@@ -373,9 +373,7 @@ const addSpell = async () => {
 
 <select
   value={campaignTag}
-  onChange={(e) =>
-   setFilters((f) => ({ ...f, ctag: e.target.value }))
-  }
+  onChange={(e) => setCampaignTag(e.target.value)}
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
   <option value="All">Campaign Tag </option>
