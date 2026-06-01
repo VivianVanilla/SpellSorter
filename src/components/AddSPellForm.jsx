@@ -165,6 +165,7 @@ export default function AddSpellForm({
   <option value="">Select Campaign Tag</option>
   <option value="Twilight">Twilight</option>
   <option value="Special-Banned">Special/Banned</option>
+  <option value="Squain">Squain</option>
 </select>
 
        <textarea
