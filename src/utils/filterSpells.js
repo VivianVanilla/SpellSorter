@@ -1,5 +1,5 @@
 
-export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag,ritual) {
+export function filterSpells(spells, filters, selectedClasses, search, selectedLevels) {
   let list = [...spells];
 
   if (search.trim()) {
@@ -18,9 +18,16 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
     list = list.filter((s) => s.school?.name === filters.school);
   }
 
-  
-  if (filters.ritual !== "All") {
-    list = list.filter((s) => s.ritual === (filters.ritual === "true"));
+ if (filters.ritual === "true") {
+    list = list.filter((spell) =>
+      spell.ritual === true
+    );
+  }
+   
+  if (filters.ritual === "false") {
+    list = list.filter((spell) =>
+      spell.ritual === false
+    );
   }
 
   if (filters.casting_time !== "All") {
@@ -41,20 +48,20 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
     );
   }
 
-    if (concentrationFilter === "Concentration") {
+    if (filters.concentration === "Concentration") {
     list = list.filter((spell) =>
       spell.duration?.toLowerCase().includes("con")
     );
   }
 
-  if (concentrationFilter === "No Concentration") {
+  if (filters.concentration === "No Concentration") {
     list = list.filter(
       (spell) =>
         !spell.duration?.toLowerCase().includes("con")
     );
   }
 
-  if (campaignTag !== "All") {
+  if (filters.campaignTag !== "All") {
     list = list.filter((spell) => spell.ctag === campaignTag);
   }
 

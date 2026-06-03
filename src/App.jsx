@@ -28,6 +28,9 @@ export default function App() {
   school: "All",
   casting_time: "All",
   damageType: "All",
+  ritual: "All",
+  concentration: "All",
+  campaignTag: "All"
 });
 
   const [selectedClasses, setSelectedClasses] = useState([]);
@@ -35,7 +38,6 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [concentrationFilter, setConcentrationFilter] = useState("All");
   const [campaignTag, setCampaignTag] = useState("All");
-  const [ritual, setRitual] = useState("All");
  const [open, setOpen] = useState(false);
 
 const [editingIndex, setEditingIndex] = useState(null);
@@ -83,11 +85,9 @@ const [editingIndex, setEditingIndex] = useState(null);
     selectedClasses,
     search,
     selectedLevels,
-    concentrationFilter,
-    campaignTag,
-    ritual
+ 
   );
-}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag,ritual]);
+}, [spells, filters, selectedClasses, search, selectedLevels]);
 
   /* ------------------ CLASS TOGGLE ------------------ */
 
@@ -361,9 +361,9 @@ const addSpell = async () => {
 
     
 <select
-  value={concentrationFilter}
+  value={filters.concentration}
   onChange={(e) =>
-    setConcentrationFilter(e.target.value)
+    setFilters((f) => ({ ...f, concentration: e.target.value }))
   }
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
@@ -377,7 +377,7 @@ const addSpell = async () => {
 </select>
 
 <select
-  value={ritual}
+  value={filters.ritual}
   onChange={(e) => setRitual(e.target.value)}
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
@@ -391,8 +391,8 @@ const addSpell = async () => {
 </select>
 
 <select
-  value={campaignTag}
-  onChange={(e) => setCampaignTag(e.target.value)}
+  value={filters.campaignTag}
+  onChange={(e) => setFilters((f) => ({ ...f, campaignTag: e.target.value }))}
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
   <option value="All">Campaign Tag </option>
