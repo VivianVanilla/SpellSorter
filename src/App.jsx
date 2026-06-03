@@ -35,6 +35,7 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [concentrationFilter, setConcentrationFilter] = useState("All");
   const [campaignTag, setCampaignTag] = useState("All");
+  const [ritual, setRitual] = useState("All");
  const [open, setOpen] = useState(false);
 
 const [editingIndex, setEditingIndex] = useState(null);
@@ -83,7 +84,8 @@ const [editingIndex, setEditingIndex] = useState(null);
     search,
     selectedLevels,
     concentrationFilter,
-    campaignTag
+    campaignTag,
+    ritual
   );
 }, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag]);
 
@@ -368,6 +370,20 @@ const addSpell = async () => {
   </option>
   <option value="No Concentration">
     No Concentration
+  </option>
+</select>
+
+<select
+  value={ritual}
+  onChange={(e) => setRitual(e.target.value)}
+  className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
+>
+  <option value="All">Ritual Tag </option>
+  <option value="ritual">
+    Ritual Only
+  </option>
+  <option value="no-ritual">
+    No rituals
   </option>
 </select>
 

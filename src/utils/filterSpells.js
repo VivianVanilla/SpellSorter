@@ -1,5 +1,5 @@
 
-export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag) {
+export function filterSpells(spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag,ritual) {
   let list = [...spells];
 
   if (search.trim()) {
@@ -16,6 +16,11 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
 
   if (filters.school !== "All") {
     list = list.filter((s) => s.school?.name === filters.school);
+  }
+
+  
+  if (filters.ritual !== "All") {
+    list = list.filter((s) => s.ritual === (filters.ritual === "ritual"));
   }
 
   if (filters.casting_time !== "All") {
