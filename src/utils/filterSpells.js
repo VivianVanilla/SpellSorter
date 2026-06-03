@@ -62,7 +62,7 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
   }
 
   if (filters.campaignTag !== "All") {
-    list = list.filter((spell) => spell.ctag === campaignTag);
+    list = list.filter((spell) => spell.ctag === filters.campaignTag);
   }
 
   return list.sort(
