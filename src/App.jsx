@@ -258,10 +258,8 @@ const addSpell = async () => {
       {/* MAIN */}
       <main className="flex-1 overflow-y-auto p-4 md:p-8">
 
-       <div className="mb-8 flex flex-col md:flex-row gap-3 md:items-end">
-
   {/* SEARCH */}
-  <div className="relative w-full md:w-80">
+  <div className="relative w-full md:w-80 lg:w-full gap-2 mb-4">
     <Search className="absolute left-3 top-3 text-zinc-500" />
     <input
       value={search}
@@ -270,6 +268,11 @@ const addSpell = async () => {
       className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-10 py-3"
     />
   </div>
+
+
+       <div className="mb-8 flex flex-col md:flex-row gap-3 md:items-end">
+
+
 
   {/* Collapsable on mobile */}
 
@@ -379,10 +382,10 @@ const addSpell = async () => {
   className="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2"
 >
   <option value="All">Ritual Tag </option>
-  <option value="ritual">
+  <option value="true">
     Ritual Only
   </option>
-  <option value="no-ritual">
+  <option value="false">
     No rituals
   </option>
 </select>

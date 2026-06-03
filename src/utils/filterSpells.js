@@ -20,7 +20,7 @@ export function filterSpells(spells, filters, selectedClasses, search, selectedL
 
   
   if (filters.ritual !== "All") {
-    list = list.filter((s) => s.ritual === (filters.ritual === "ritual"));
+    list = list.filter((s) => s.ritual === (filters.ritual === "true"));
   }
 
   if (filters.casting_time !== "All") {
