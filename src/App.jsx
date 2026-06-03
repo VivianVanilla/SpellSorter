@@ -87,7 +87,7 @@ const [editingIndex, setEditingIndex] = useState(null);
     campaignTag,
     ritual
   );
-}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag]);
+}, [spells, filters, selectedClasses, search, selectedLevels, concentrationFilter, campaignTag,ritual]);
 
   /* ------------------ CLASS TOGGLE ------------------ */
 
