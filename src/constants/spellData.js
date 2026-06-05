@@ -8,6 +8,7 @@ export const CLASS_OPTIONS = [
   "Sorcerer",
   "Warlock",
   "Wizard",
+  "Witch",
 ];
 
 export const CLASS_COLORS = {
@@ -20,6 +21,7 @@ export const CLASS_COLORS = {
   Ranger: "#11520E",
   Artificer: "#AD9366",
   Paladin: "#F7D80F",
+  Witch: "#681D7A",
 };
 
 export const DAMAGE_TYPES = [
