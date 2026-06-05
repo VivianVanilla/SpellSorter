@@ -21,7 +21,7 @@ export const CLASS_COLORS = {
   Ranger: "#11520E",
   Artificer: "#AD9366",
   Paladin: "#F7D80F",
-  Witch: "#D63EFA",
+  Witch: "#17e6df",
 };
 
 export const DAMAGE_TYPES = [

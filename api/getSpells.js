@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       blob.pathname.endsWith(".json")
     );
 
-    console.log("SPELL FILES:", spellFiles);
+    
 
     const spells = await Promise.all(
       spellFiles.map(async (file) => {
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       })
     );
 
-    console.log("FINAL SPELL ARRAY:", spells);
+    
 
     return res.status(200).json(spells);
   } catch (error) {
