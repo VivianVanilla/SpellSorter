@@ -38,6 +38,7 @@ export const DAMAGE_TYPES = [
   "Radiant",
   "Slashing",
   "Thunder",
+  "Sickness",
   "None",
   "Multiple",
 ];
