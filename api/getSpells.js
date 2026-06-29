@@ -1,42 +1,23 @@
-import { list } from "@vercel/blob";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
 export default async function handler(req, res) {
   try {
-    const { blobs } = await list({
-      prefix: "spells/",
-    });
+    const { data, error } = await supabase
+      .from("spells")
+      .select("spell_data");
 
-    console.log("ALL BLOBS FOUND:", blobs);
+    if (error) throw error;
 
-    const spellFiles = blobs.filter((blob) =>
-      blob.pathname.endsWith(".json")
-    );
-
-    
-
-    const spells = await Promise.all(
-      spellFiles.map(async (file) => {
-        console.log("FETCHING:", file.url);
-
-        const response = await fetch(file.url);
-
-        const data = await response.json();
-
-        console.log("SPELL LOADED:", data);
-
-        return data;
-      })
-    );
-
-    
+    const spells = data.map((row) => row.spell_data);
 
     return res.status(200).json(spells);
   } catch (error) {
     console.error("GET SPELLS FAILED:", error);
-
-    return res.status(500).json({
-      error: error.message,
-    });
+    return res.status(500).json({ error: error.message });
   }
-} 
-
+}
