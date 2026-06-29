@@ -54,6 +54,7 @@ export const SCHOOLS = [
   "Necromancy",
   "Transmutation",
   "Graviturgy",
+  "Sickness",
   "Other"
 ];
 
